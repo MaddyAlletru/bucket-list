@@ -11,9 +11,17 @@
 
     {% for wish in wishes %}
 
-        <a href="{{ path('wish/detail', {'id': wish.id}) }}"><p>{{ wish.title }}</p>
-        </a>
+        <a href="{{ path('wish/detail', {'id': wish.id}) }}">
+            <p>{{ wish.title }}
+            ---
+                {% if (wish.category.id) %}
+                    {{ wish.category.name }}
+                    {% else %}
+                    Aucune catégorie
+            {% endif %}
+            </p>
 
+        </a>
 
     {% endfor %}
 

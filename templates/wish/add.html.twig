@@ -1,10 +1,25 @@
 {% extends 'base.html.twig' %}
 
-{% block body %}
-
-{% endblock %}
-
 {% block title %}
 
 {% endblock %}
+
+{% block body %}
+
+    <h2> Vous souhaitez ajouter un whish à la liste de wishes ? </h2>
+
+    {{ form_start(wishForm) }}
+
+    {{ form_label(wishForm.title) }}
+    {{ form_widget(wishForm.title) }}
+
+    {{ form_rest(wishForm) }}
+
+    <button>Add a Wish ! </button>
+
+    {{ form_end(wishForm) }}
+
+{% endblock %}
+
+
 

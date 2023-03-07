@@ -4,14 +4,13 @@
         <link rel="stylesheet" href="{{ asset('css/normalize.css') }}">
         <link rel="stylesheet" href="{{asset('css/stylesheet.css') }}">
 
-        <link href="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Roboto+Condensed:ital,wght@1,300&family=Work+Sans:wght@300&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
 
-        <link rel="icon" href="{{ asset('img/favicon.png') }}">
+    <link rel="icon" href="{{ asset('img/favicon.png') }}">
 
-        <title> {% block title %} Page d'accueil du TP 3 {% endblock %} </title>
+        <title> {% block title %} TP Bucket-List {% endblock %} </title>
 
     </head>
 
@@ -24,16 +23,23 @@
 
         <main>
 
+            {% for label, messages in app.flashes %}
+                {% for message in messages %}
+
+            <div class="message">
+                    {{ message }}
+
+                </div>
+            {% endfor %}
+        {% endfor %}
+
         {% block body %}
 
-        <p>Body par défaut</p>
-        <p>Body par défaut</p>
-        <p>Body par défaut</p>
-        <p>Body par défaut</p>
-        <p>Body par défaut</p>
-        <p>Body par défaut</p>
-        <p>Body par défaut</p>
-        <p>Body par défaut</p>
+        <p>Bienvenue sur cette jolie page ! <br> </p>
+        <p>Vous pouvez ajouter vos souhaits mais aussi consulter tous les souhaits
+        qui ont déjà été renseignés. <br></p>
+            <p>Très bonne visite !
+        </p>
 
         {% endblock %}
 
@@ -43,5 +49,3 @@
 
         {% include 'bodyStructure/footer.html.twig' %}
 
-
-</html>

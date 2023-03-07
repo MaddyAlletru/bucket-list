@@ -2,8 +2,14 @@
     <ul>
         <li><a href="{{ path('main_home') }}">Welcome - </a></li>
         <li><a href="{{ path('main_aboutUs') }}"> About us - </a></li>
-        <li><a href="{{ path('wish/list') }}">WishList</a></li>
+        <li><a href="{{ path('wish/list') }}">WishList - </a></li>
 
+        {% if app.user %}
+        <li><a href="{{ path('wish/add') }}">Ajouter un Wish </a></li>
+        <li><a href="{{ path('app_logout') }}">Déconnecter l'utilisateur {{ app.user.prenom }}</a></li>
+{% else %}
+    <li><a href="{{ path('app_login') }}"> Se connecter </a></li>
+ {% endif %}
 
     </ul>
 </nav>

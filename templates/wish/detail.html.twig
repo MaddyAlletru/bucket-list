@@ -1,24 +1,30 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-Détail d'une idée
+    <h2>Détail d'une idée</h2>
 {% endblock %}
+
 
 {% block body %}
 
-    <h2>Détail de l'idée</h2>
+<h2>Détail de l'idée</h2>
+<div class="">
+
     <div class="">
-
         <div class="">
-            <h2>{{ wish.title }}</h2>
-            <div>Description : {{ wish.description }}</div>
-            <div>Auteur : {{ wish.author }}</div>
-            <div>Date de création : {{ wish.dateCreated | date('d-m-Y') }}</div>
-
+            <a class="" href="{{ path('remove', {'id': wish.id}) }}"
+               onclick="return confirm('Etes-vous sûr de vouloir supprimer ce Wish ? : {{ wish.title }}')">Supprimer ce Wish</a>
         </div>
+
+        <h2>{{ wish.title }}</h2>
+        <div>Description : {{ wish.description }}</div>
+        <div>Auteur : {{ wish.author }}</div>
+        <div>Date de création : {{ wish.dateCreated | date('d-m-Y') }}</div>
+
+        {% if (wish.category.id) %}
+            <div> Catégorie : {{ wish.category.name }} </div>
+        {% endif %}
+
     </div>
 
-
-
-{% endblock %}
-
+ {% endblock %}

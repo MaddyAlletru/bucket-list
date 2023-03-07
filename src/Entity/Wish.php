@@ -5,8 +5,10 @@ namespace App\Entity;
 use App\Repository\WishRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: WishRepository::class)]
+#[ORM\HasLifecycleCallbacks]
 class Wish
 {
     #[ORM\Id]
@@ -14,6 +16,13 @@ class Wish
     #[ORM\Column]
     private ?int $id = null;
 
+    #[Assert\NotBlank(message: "Le titre doit être rempli !")]
+    #[Assert\Length(
+        min: 2,
+        max: 255,
+        minMessage: "Minimum {{ limit }} caractères requis",
+        maxMessage: "Maximum {{ limit }} caractères requis"
+    )]
     #[ORM\Column(length: 250)]
     private ?string $title = null;
 
@@ -26,8 +35,15 @@ class Wish
     #[ORM\Column(length: 50)]
     private ?string $author = null;
 
+#    #[ORM\Column(length: 255)]
+#    private ?string $image = null;
+
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $dateCreated = null;
+
+    #[ORM\ManyToOne]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Category $category = null;
 
     public function getId(): ?int
     {
@@ -90,6 +106,25 @@ class Wish
     public function setDateCreated(?\DateTimeInterface $dateCreated): self
     {
         $this->dateCreated = $dateCreated;
+
+        return $this;
+    }
+
+    #[ORM\PrePerist]
+    public function setCreatedAtValue(): void
+    {
+       $this->setDateCreated(new \DateTime());
+       $this->setIsPublished(true);
+    }
+
+    public function getCategory(): ?Category
+    {
+        return $this->category;
+    }
+
+    public function setCategory(?Category $category): self
+    {
+        $this->category = $category;
 
         return $this;
     }

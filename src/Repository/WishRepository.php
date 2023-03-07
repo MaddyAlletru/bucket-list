@@ -30,7 +30,8 @@ class WishRepository extends ServiceEntityRepository
         }
     }
 
-    public function remove(Wish $entity, bool $flush = false): void
+    public function remove(Wish $entity,
+                           bool $flush = true): void
     {
         $this->getEntityManager()->remove($entity);
 
